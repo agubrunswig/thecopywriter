@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agustín Brunswig — Comunicación & Contenidos</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0f0f0f;
+    --white: #f9f5ee;
+    --accent: #c8402a;
+    --accent2: #e8a020;
+    --gray: #6b6b6b;
+    --light: #f0ebe0;
+    --border: #d4cfc4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--white); color: var(--black); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.7; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 4rem; background: var(--white); border-bottom: 1px solid var(--border); }
+  nav .logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.02em; }
+  nav .logo span { color: var(--accent); }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav a { text-decoration: none; color: var(--gray); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+  nav a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 70px; }
+  .hero-left { padding: 6rem 3rem 6rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+  .hero-tag { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); display: inline-block; padding: 0.3rem 0.8rem; margin-bottom: 2rem; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 5vw, 5rem); font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem; }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero-sub { font-size: 1.05rem; color: var(--gray); max-width: 460px; margin-bottom: 2.5rem; line-height: 1.8; }
+  .hero-cta { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--accent); color: #fff; padding: 1rem 2rem; text-decoration: none; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.05em; transition: background 0.2s; }
+  .hero-cta:hover { background: #a8331f; }
+  .hero-stats { display: flex; gap: 2.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; display: block; }
+  .stat-label { font-size: 0.78rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.08em; }
+  .hero-right { background: var(--black); position: relative; overflow: hidden; display: flex; align-items: flex-end; }
+  .hero-right-inner { padding: 3rem; z-index: 2; position: relative; }
+  .hero-quote { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--white); line-height: 1.5; font-style: italic; border-left: 3px solid var(--accent); padding-left: 1.5rem; }
+  .hero-pattern { position: absolute; top: 0; right: 0; width: 60%; height: 60%; opacity: 0.05; }
+  .photo-placeholder { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; }
+  .photo-circle { width: 220px; height: 220px; border-radius: 50%; background: linear-gradient(135deg, #c8402a22, #e8a02022); border: 2px solid #c8402a55; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 5rem; color: var(--accent); opacity: 0.4; }
+
+  /* SECTION BASE */
+  section { padding: 6rem 4rem; }
+  .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 3rem; }
+  .section-title span { color: var(--accent); }
+
+  /* SERVICIOS */
+  .services { background: var(--light); }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); }
+  .service-card { background: var(--white); padding: 2.5rem 2rem; transition: background 0.2s; }
+  .service-card:hover { background: var(--black); }
+  .service-card:hover .service-title, .service-card:hover .service-desc, .service-card:hover .service-num { color: var(--white); }
+  .service-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--border); line-height: 1; margin-bottom: 1.2rem; transition: color 0.2s; }
+  .service-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.8rem; transition: color 0.2s; }
+  .service-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.7; transition: color 0.2s; }
+  .service-tags { margin-top: 1.2rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .stag { font-size: 0.72rem; background: var(--light); color: var(--gray); padding: 0.2rem 0.6rem; border-radius: 2px; }
+  .service-card:hover .stag { background: #ffffff22; color: #ffffff88; }
+
+  /* EXPERIENCIA */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border); align-items: start; }
+  .exp-year { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--gray); padding-top: 0.2rem; }
+  .exp-role { font-weight: 500; font-size: 1rem; margin-bottom: 0.3rem; }
+  .exp-org { color: var(--accent); font-size: 0.88rem; font-weight: 500; margin-bottom: 0.5rem; }
+  .exp-detail { font-size: 0.88rem; color: var(--gray); }
+
+  /* MUESTRAS */
+  .samples { background: var(--black); color: var(--white); }
+  .samples .section-label { color: var(--accent2); }
+  .samples .section-title { color: var(--white); }
+  .samples-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .sample-card { border: 1px solid #2a2a2a; padding: 2rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
+  .sample-card:hover { border-color: var(--accent); }
+  .sample-type { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1rem; }
+  .sample-headline { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.8rem; line-height: 1.4; }
+  .sample-body { font-size: 0.85rem; color: #999; line-height: 1.7; }
+  .sample-platform { position: absolute; bottom: 1rem; right: 1rem; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* CONTACTO */
+  .contact { background: var(--accent); color: var(--white); text-align: center; }
+  .contact .section-label { color: rgba(255,255,255,0.6); }
+  .contact .section-title { color: var(--white); }
+  .contact-sub { font-size: 1rem; opacity: 0.85; max-width: 520px; margin: 0 auto 2.5rem; }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .contact-link { border: 1.5px solid rgba(255,255,255,0.5); color: var(--white); padding: 0.9rem 2rem; text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.05em; transition: background 0.2s; }
+  .contact-link:hover { background: rgba(255,255,255,0.15); }
+  .contact-link.primary { background: var(--white); color: var(--accent); }
+  .contact-link.primary:hover { background: #f0ebe0; }
+
+  /* FOOTER */
+  footer { padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--gray); }
+
+  /* ANIM */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-left > * { animation: fadeUp 0.6s ease both; }
+  .hero-tag { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.2s; }
+  .hero-sub { animation-delay: 0.3s; }
+  .hero-cta { animation-delay: 0.4s; }
+  .hero-stats { animation-delay: 0.5s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { min-height: 320px; }
+    .hero-left { padding: 4rem 1.5rem 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .samples-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.4rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Agustín <span>Brunswig</span></div>
+  <ul>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#experiencia">Experiencia</a></li>
+    <li><a href="#muestras">Muestras</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">Disponible para proyectos freelance</span>
+    <h1>Periodista.<br><em>Comunicador.</em><br>Copywriter.</h1>
+    <p class="hero-sub">Más de una década de experiencia en medios deportivos, prensa gubernamental y contenido digital. Escritura que informa, conecta y convierte.</p>
+    <a href="#contacto" class="hero-cta">Trabajemos juntos →</a>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Años de experiencia</span>
+      </div>
+      <div>
+        <span class="stat-num">3</span>
+        <span class="stat-label">Sectores dominados</span>
+      </div>
+      <div>
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Trabajo remoto OK</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="photo-placeholder">
+      <div class="photo-circle">AB</div>
+    </div>
+    <svg class="hero-pattern" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="180" stroke="white" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="120" stroke="white" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="60" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="200" x2="400" y2="200" stroke="white" stroke-width="0.5"/>
+      <line x1="200" y1="0" x2="200" y2="400" stroke="white" stroke-width="0.5"/>
+    </svg>
+    <div class="hero-right-inner">
+      <p class="hero-quote">"Las palabras correctas, en el momento correcto, cambian la narrativa."</p>
+    </div>
+  </div>
+</section>
+
+<section id="servicios" class="services">
+  <p class="section-label">Lo que ofrezco</p>
+  <h2 class="section-title">Servicios <span>disponibles</span></h2>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-title">Copywriting para Redes Sociales</div>
+      <div class="service-desc">Contenido optimizado para Instagram, X, Facebook y LinkedIn. Calendarios editoriales, copys de alto impacto y estrategia de voz para marcas, clubes o figuras públicas.</div>
+      <div class="service-tags"><span class="stag">Instagram</span><span class="stag">X/Twitter</span><span class="stag">LinkedIn</span><span class="stag">Facebook</span></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-title">Periodismo y Redacción Deportiva</div>
+      <div class="service-desc">Crónicas, columnas de opinión, perfiles de atletas, coberturas en vivo y notas de análisis. Experiencia en fútbol, básquet y deportes regionales.</div>
+      <div class="service-tags"><span class="stag">Artículos</span><span class="stag">Crónicas</span><span class="stag">Columnas</span><span class="stag">Newsletter</span></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-title">Comunicación Institucional</div>
+      <div class="service-desc">Redacción de comunicados, gacetillas de prensa, discursos y contenido oficial para organismos públicos, ONGs y federaciones deportivas.</div>
+      <div class="service-tags"><span class="stag">Gacetillas</span><span class="stag">Discursos</span><span class="stag">Informes</span></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-title">Contenido Web y SEO</div>
+      <div class="service-desc">Artículos optimizados para buscadores, textos para landing pages, bios institucionales y contenido evergreen para sitios deportivos, culturales o corporativos.</div>
+      <div class="service-tags"><span class="stag">Blog posts</span><span class="stag">SEO</span><span class="stag">Landing pages</span></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-title">Community Management</div>
+      <div class="service-desc">Gestión completa de redes sociales: publicaciones, respuestas, moderación y reportes mensuales. Ideal para clubes, marcas deportivas y funcionarios.</div>
+      <div class="service-tags"><span class="stag">Gestión diaria</span><span class="stag">Reportes</span><span class="stag">Estrategia</span></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-title">Guiones y Locuciones</div>
+      <div class="service-desc">Guiones para videos institucionales, spots radiales, coberturas en video y documentales deportivos. Adaptados a tono, audiencia y plataforma.</div>
+      <div class="service-tags"><span class="stag">Video</span><span class="stag">Radio</span><span class="stag">Podcast</span></div>
+    </div>
+
+  </div>
+</section>
+
+<section id="experiencia">
+  <p class="section-label">Trayectoria</p>
+  <h2 class="section-title">Experiencia <span>profesional</span></h2>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-year">Medios gráficos</div>
+      <div>
+        <div class="exp-role">Cronista Deportivo</div>
+        <div class="exp-org">Diario Norte — Resistencia, Chaco</div>
+        <div class="exp-detail">Cobertura de eventos deportivos regionales y nacionales, redacción de crónicas, entrevistas y notas de análisis para uno de los principales diarios del NEA.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-year">Prensa estatal</div>
+      <div>
+        <div class="exp-role">Responsable de Prensa</div>
+        <div class="exp-org">Instituto del Deporte Chaqueño — Gobierno del Chaco</div>
+        <div class="exp-detail">Gestión de comunicación institucional, redacción de gacetillas, coordinación con medios y producción de contenido oficial para el organismo provincial.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-year">Comunicación gubernamental</div>
+      <div>
+        <div class="exp-role">Prensa Institucional</div>
+        <div class="exp-org">Ministerio de Producción — Gobierno del Chaco</div>
+        <div class="exp-detail">Comunicación oficial del ministerio, redacción de informes, discursos y material de difusión. Coordinación con equipos de prensa y medios provinciales.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-year">Medios digitales</div>
+      <div>
+        <div class="exp-role">Redactor Deportivo</div>
+        <div class="exp-org">BasquetRosario.net</div>
+        <div class="exp-detail">Cobertura del básquet regional y nacional, redacción de noticias, crónicas y análisis para audiencia digital especializada.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-year">Radio</div>
+      <div>
+        <div class="exp-role">Periodista Radial</div>
+        <div class="exp-org">Medios radiales — Chaco</div>
+        <div class="exp-detail">Conducción y producción de segmentos deportivos, entrevistas en vivo y coberturas en tiempo real de eventos deportivos regionales.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="muestras" class="samples">
+  <p class="section-label">Trabajo en acción</p>
+  <h2 class="section-title" style="color:var(--white)">Muestras de <span style="color:var(--accent2)">escritura</span></h2>
+  <div class="samples-grid">
+
+    <div class="sample-card">
+      <div class="sample-type">Copy — Instagram Deportivo</div>
+      <div class="sample-headline">El partido que nadie quería perder, y nadie pudo ganar.</div>
+      <div class="sample-body">Noventa minutos de intensidad pura. Dos equipos que lo dieron todo y un empate que, paradójicamente, le sirve más al que llegó con menos. Así es el fútbol. Cruel y hermoso al mismo tiempo. 🔥 #ChacoDeporte</div>
+      <div class="sample-platform">Instagram</div>
+    </div>
+
+    <div class="sample-card">
+      <div class="sample-type">Gacetilla de Prensa</div>
+      <div class="sample-headline">El Instituto del Deporte Chaqueño lanza su programa de becas 2024</div>
+      <div class="sample-body">La secretaría de Deporte confirmó hoy la apertura de 120 nuevas becas para deportistas de alto rendimiento en todo el territorio provincial. El programa busca fortalecer la representación chaqueña en competencias nacionales e internacionales.</div>
+      <div class="sample-platform">Comunicado oficial</div>
+    </div>
+
+    <div class="sample-card">
+      <div class="sample-type">Artículo web — Análisis</div>
+      <div class="sample-headline">¿Por qué el básquet chaqueño no da el salto definitivo?</div>
+      <div class="sample-body">Hay talento, hay historia y hay pasión. Lo que falta, según los protagonistas, es estructura. Un recorrido por los obstáculos que frenan el crecimiento del básquet en el interior del país y las voces que apuestan por el cambio.</div>
+      <div class="sample-platform">Web / Blog</div>
+    </div>
+
+    <div class="sample-card">
+      <div class="sample-type">Copy — LinkedIn Institucional</div>
+      <div class="sample-headline">Comunicar bien no es solo escribir bien. Es entender a quién le hablás.</div>
+      <div class="sample-body">En 10 años de trabajo en medios, radios y organismos del Estado, aprendí que el mejor comunicado no es el más elaborado. Es el que llega. El que genera acción. El que construye confianza. Eso es lo que ofrezco.</div>
+      <div class="sample-platform">LinkedIn</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contacto" class="contact">
+  <p class="section-label">¿Hablamos?</p>
+  <h2 class="section-title">Listo para tu <span style="color:rgba(255,255,255,0.6)">próximo proyecto</span></h2>
+  <p class="contact-sub">Disponible para proyectos freelance, contratos remotos y colaboraciones continuas. Respondo en menos de 24 horas.</p>
+  <div class="contact-links">
+    <a href="mailto:agustin.brunswig@email.com" class="contact-link primary">Enviar mensaje →</a>
+    <a href="https://linkedin.com/in/agustinbrunswigs" class="contact-link">LinkedIn</a>
+    <a href="https://wa.me/549XXXXXXXXX" class="contact-link">WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Agustín Brunswig — Periodismo & Comunicación</span>
+  <span>Resistencia, Chaco, Argentina · Trabajo remoto disponible</span>
+</footer>
+
+</body>
+</html>
